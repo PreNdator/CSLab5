@@ -1,11 +1,12 @@
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllersWithViews(); // добавляем сервисы MVC
+
 var app = builder.Build();
 
-app.Run(async (context) =>
-{
-    context.Response.ContentType = "text/html; charset=utf-8";
-    await context.Response.SendFileAsync("View/index.html");
-}
-);
+// устанавливаем сопоставление маршрутов с контроллерами
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
