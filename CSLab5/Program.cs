@@ -1,10 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using Data;
+using CSDBapp;
+using Model;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews(); // добавляем сервисы MVC
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<GameDb>();
 
 var app = builder.Build();
 
-// устанавливаем сопоставление маршрутов с контроллерами
+app.UseStaticFiles();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

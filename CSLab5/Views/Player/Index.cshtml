@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Model.Player>
+
+<!doctype html>
+<html>
+<head>
+    <title>Test</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/Content/StyleSheet.css" />
+</head>
+<body>
+    <h2>Список пользователей</h2>
+    <p><a asp-action="Create">Добавить пользователя</a></p>
+    <table class="table">
+        <tr><th>Имя</th><th>Баланс</th><th>Королевство</th></tr>
+        @{
+            var kingdoms = (List<Model.Kingdom>)ViewBag.Kingdoms;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Username</td>
+                <td>@item.Balance</td>
+                <td>
+                    @{
+                        if (item.Kingdom != null)
+                        {
+                            <text>@item.Kingdom.Name</text>
+                        }
+                        else
+                        {
+                            <text>-</text>
+                        }
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Stats" asp-route-id="@item.Stats?.Id">Характеристики</a>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Player" asp-route-id="@item.Id">Изменить</a>
+                </td>
+                <td>
+                    <form asp-controller="Player" asp-action="Delete" method="post" asp-route-id="@item.Id">
+                        <input type="submit" value="Удалить" />
+                    </form>
+                </td>
+                <td>
+                    @item.RegistrationDate;
+                </td>
+            </tr>
+        }
+    </table>
+    <p><a asp-controller="Home" asp-action="Index">Назад</a></p>
+</body>
+</html>

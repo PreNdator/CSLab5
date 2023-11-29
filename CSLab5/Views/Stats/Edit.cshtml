@@ -1,0 +1,48 @@
+﻿@model Model.PlayerStats
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>Test</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+
+    <form asp-action="Edit" asp-controller="Stats">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="PlayerId" />
+        <p>
+            <label asp-for="Level">Уровень</label><br />
+            <input type="text" asp-for="Level" />
+        </p>
+        <p>
+            <label asp-for="Strength">Сила</label><br />
+            <input type="text" asp-for="Strength" />
+        </p>
+        <p>
+            <label asp-for="Intelligence">Интеллект</label><br />
+            <input type="text" asp-for="Intelligence" />
+        </p>
+        <p>
+            <label asp-for="Agility">Ловкость</label><br />
+            <input type="text" asp-for="Agility" />
+        </p>
+        <p>
+            <input type="submit" value="Изменить" />
+        </p>
+    </form>
+    <p><a asp-controller="Player" asp-action="Index">Назад</a></p>
+</body>
+</html>

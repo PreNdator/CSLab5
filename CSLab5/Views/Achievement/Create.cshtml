@@ -1,0 +1,43 @@
+﻿@model Model.Achievement
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>Test</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h2>Добавление достижения</h2>
+
+    <form asp-action="Create" asp-controller="Achievement">
+        <p>
+            <label asp-for="Name">Имя</label><br />
+            <input type="text" asp-for="Name" />
+        </p>
+        <p>
+            <label asp-for="Description">Описание</label><br />
+            <input type="text" asp-for="Description"/>
+        </p>
+        <p>
+            <label asp-for="Reward">Награда</label><br />
+            <input type="number" asp-for="Reward" step="0.01" />
+        </p>
+        <p>
+            <input type="submit" value="Добавить"/>
+        </p>
+
+    </form>
+    <p><a asp-action="Index">Назад</a></p>
+</body>
+</html>

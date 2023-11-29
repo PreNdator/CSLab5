@@ -1,25 +1,23 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Model;
-using System.Reflection.Emit;
 
 namespace Data
 {
-    class GameDb: DbContext
+    public class GameDb : DbContext
     {
-        DbSet<Achievement> Achievements { get; set; } = null!;
-        DbSet<Kingdom> Kingdoms { get; set; } = null!;
-        DbSet<Player> Players { get; set; } = null!;
-        DbSet<PlayerStats> PlayerStats { get; set; } = null!;
+        public DbSet<Achievement> Achievements { get; set; } = null!;
+        public DbSet<Kingdom> Kingdoms { get; set; } = null!;
+        public DbSet<Player> Players { get; set; } = null!;
+        public DbSet<PlayerStats> PlayerStats { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-
+ 
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+
             var config = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false).Build();
 
             if (!optionsBuilder.IsConfigured)

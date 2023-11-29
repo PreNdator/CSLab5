@@ -1,0 +1,62 @@
+﻿@model Model.Player
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+<!doctype html>
+<html>
+<head>
+    <title>Test</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h2>Добавление пользователя</h2>
+
+    <form asp-action="create" asp-controller="player">
+        <p>
+            <label asp-for="Username">Имя</label><br />
+            <input type="text" asp-for="Username" />
+        </p>
+        <p>
+            <label asp-for="Balance">Баланс</label><br />
+            <input type="number" asp-for="Balance" step="0.01" />
+        </p>
+        <p>
+            <label for="Kingdom">Королевство</label><br />
+            <select asp-for="KingdomId">
+                <option value="">Без королевства</option>
+                @foreach (var item in ViewBag.Kingdoms)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+        </p>
+        <p>
+
+            <label for="achievements">Достижения:</label><br />
+            @foreach (var item in ViewBag.Achievements)
+            {
+                
+                <input type="checkbox" id="achievement-@item.Id" name="selectedAchievements" value="@item.Id" />
+
+                <label for="achievement-@item.Id">@item.Name</label>
+                <br />
+            }
+
+        </p>
+        <p>
+            <input type="submit" value="Добавить"/>
+        </p>
+
+    </form>
+    <p><a asp-controller="Player" asp-action="Index">Назад</a></p>
+</body>
+</html>
